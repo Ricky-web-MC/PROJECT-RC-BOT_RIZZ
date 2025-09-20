@@ -5,7 +5,7 @@ const { json } = require("body-parser");
 const { constants } = require("buffer");
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const usf = "./user.json";
 
 app.use(express.json());
