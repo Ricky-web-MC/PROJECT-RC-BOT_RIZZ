@@ -2,6 +2,7 @@ const express = require("express");
 const fs = require("fs");
 const cors = require("cors");
 const { json } = require("body-parser");
+const { constants } = require("buffer");
 
 const app = express();
 const PORT = 3000;
@@ -24,11 +25,11 @@ app.post("/login", (req, res) => {
     const user = users.find(u => u.username === username && u.password === password);
 
     if(user){
-        res.json({success: true, message: "Login telah berhasil"});
+        res.json({success: true, message: "Login telah berhasil, silahkan bersenang-senang :>"});
     } else {
         res.json({success: false, message: "Username atau password tidak diketahui, silahkan daftar! atau hubungi admin"});
     }
-})
+});
 
 
 
@@ -43,13 +44,17 @@ app.post("/register", (req, res) => {
     }
 
     if (users.find(u => u.username === username)) {
-        return res.json({ success: false, message: "Username Sudah Dipakai!"});
+        return res.json({ success: false, message: "Username Sudah Dipakai orang lain!, gunakan yang berbeda ^ ^"});
+    }
+
+    if (users.find(u => u.password === password)) {
+        return res.json({ success: false, message: "password Sudah Dipakai orang lain!, gunakan yang berbeda ^ ^"});
     }
 
     users.push({username, phone, password});
     fs.writeFileSync(usf, JSON.stringify(users, null, 2));
 
-    res.json({ success: true, message: "register Berhasil!"});
+    res.json({ success: true, message: "register Berhasil, silahkan login untuk melanjutkan (⁠≧⁠▽⁠≦⁠)"});
 });
 
 app.listen(PORT, () => console.log(`server running on http;//localhost:${PORT}`));

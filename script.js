@@ -28,6 +28,7 @@ const registerForm = document.getElementById("registerForm");
 if(registerForm) {
 registerForm.addEventListener("submit", async (e) => {
     e.preventDefault();
+    
     const username = document.getElementById("username").value;
     const phone = document.getElementById("phone").value;
     const password = document.getElementById("password").value;
